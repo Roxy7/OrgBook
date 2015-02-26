@@ -1,0 +1,11 @@
+rx7book_accueil:
+    path:      /book
+    defaults:  { _controller: "Rx7BookBundle:Book:index" }
+
+rx7book_voir:
+    path:      /book/{id}
+    defaults:  { _controller: "Rx7BookBundle:Book:show" }
+
+rx7book_ajouter:
+    path:      /book/add
+    defaults:  { _controller: "Rx7BookBundle:Book:add" }
