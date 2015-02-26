@@ -1,11 +1,25 @@
-rx7book_accueil:
-    path:      /
-    defaults:  { _controller: "Rx7BookBundle:Book:index" }
+rx7book_index:
+    path:      /{page}
+    defaults:  { _controller: "Rx7BookBundle:Book:index, page: 1" }
+    requirements:
+        page: \d*
 
-rx7book_voir:
+rx7book_show:
     path:      /show/{id}
     defaults:  { _controller: "Rx7BookBundle:Book:show" }
 
-rx7book_ajouter:
+rx7book_add:
     path:      /add
     defaults:  { _controller: "Rx7BookBundle:Book:add" }
+    
+rx7book_update:
+    path:      /update/{id}
+    defaults:  { _controller: "Rx7BookBundle:Book:update" }
+    requirements:
+        page: \d*
+    
+rx7book_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: "Rx7BookBundle:Book:delete" }
+    requirements:
+        page: \d*
