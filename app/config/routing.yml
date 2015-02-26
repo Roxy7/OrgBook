@@ -1,7 +1,7 @@
 rx7_book:
     resource: "@Rx7BookBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /book
 
 app:
-    resource: @AppBundle/Controller/
+    resource: "@AppBundle/Controller/"
     type:     annotation
