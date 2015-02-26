@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Visualisation d'un livre sur OrgBook</title>
-  </head>
-  <body>
+{% extends "Rx7BookBundle::layout.html.twig" %}
+
+{% block title %}
+  Voir - {{ parent() }}
+{% endblock %}
+
+{% block book_body %}
     <h1>Visualisation d'un livre</h1>
 
     <p>
@@ -17,5 +18,4 @@
       Ici nous pourrons voir le livre ayant comme id : {{ id }}<br />
       Mais pour l'instant, nous ne savons pas encore le faire, cela viendra !
     </p>
-  </body>
-</html>
+{% endblock %}

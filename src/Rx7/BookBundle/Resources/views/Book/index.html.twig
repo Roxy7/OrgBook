@@ -1,0 +1,23 @@
+{% extends "Rx7BookBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block book_body %}
+
+  <h2>Liste des livres</h2>
+
+  <ul>
+    {% for book in books %}
+      <li>
+        <a href="{{ path('rx7book_show', {'id': book.id}) }}">{{ book.titre }}</a>
+        par {{ book.auteur }},
+        le {{ book.date|date('d/m/Y') }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'articles</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
