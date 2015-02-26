@@ -1,0 +1,27 @@
+{% extends "Rx7BookBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block book_body %}
+
+  <h2>Modifier un livre</h2>
+
+  {% include "Rx7BookBundle:Book:form.html.twig" %}
+
+  <p>
+    Vous éditez un article déjà existant,
+    ne le changez pas trop pour éviter
+    aux membres de ne pas comprendre
+    ce qu'il se passe.
+  </p>
+
+  <p>
+    <a href="{{ path('rx7book_show', {'id': book.id}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour au livre
+    </a>
+  </p>
+
+{% endblock %}

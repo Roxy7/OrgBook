@@ -1,11 +1,15 @@
 {% extends "Rx7BookBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajout - {{ parent() }}
+  Ajoutter un livre - {{ parent() }}
 {% endblock %}
 
 {% block book_body %}
-    <h1>Ajout d'un livre</h1>
+
+  <h2>Ajouter un livre</h2>
+
+  {% include "Rx7BookBundle:Book:form.html.twig" %}
+
 
 
 {% endblock %}

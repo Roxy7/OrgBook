@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block body %}
+<p>
+      {# On affiche tous les messages flash dont le nom est « info » #}
+      {% for message in app.session.flashbag.get('info') %}
+        <p class="alert alert-info" role="alert"">{{ message }}</p>
+      {% endfor %}
+    </p>
 
   {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
   <h1>Books</h1>

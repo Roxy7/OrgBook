@@ -65,7 +65,7 @@ class BookController extends Controller
 		if( $this->get('request')->getMethod() == 'POST' )
     	{
 	      	// Ici, on s'occupera de la création et de la gestion du formulaire
-	    	$this->get('session')->getFlashBag()->add('info', 'Article bien enregistré');
+	    	$this->get('session')->getFlashBag()->add('info', 'Livre bien enregistré');
 	
 	    	// Le « flashBag » est ce qui contient les messages flash dans la session
 	    	// Il peut bien sûr contenir plusieurs messages :
@@ -75,17 +75,40 @@ class BookController extends Controller
 	    	return $this->redirect( $this->generateUrl('rx7book_show', array('id' => 5)) );
     	}
     	
-    	return $this->render('Rx7BookBundle:Book:add.html.twig');
+    	$book = array(
+				'id'      => 1,
+				'titre'   => 'Mon weekend a Phi Phi Island !',
+				'auteur'  => 'winzou',
+				'contenu' => 'Ce weekend était trop bien. Blabla…',
+				'date'    => new \Datetime()
+		);
+		
+		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
+		return $this->render('Rx7BookBundle:Book:add.html.twig', array(
+				'book' => $book
+		));
 	}
 	
-	public function updateAction()
+	public function updateAction($id)
 	{
-		return $this->render('Rx7BookBundle:Book:update.html.twig');
+		$book = array(
+				'id'      => 1,
+				'titre'   => 'Mon weekend a Phi Phi Island !',
+				'auteur'  => 'winzou',
+				'contenu' => 'Ce weekend était trop bien. Blabla…',
+				'date'    => new \Datetime()
+		);
+		
+		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
+		return $this->render('Rx7BookBundle:Book:update.html.twig', array(
+				'book' => $book
+		));
 	}
 	
 	public function deleteAction()
 	{
-		return $this->render('Rx7BookBundle:Book:delete.html.twig');
+		$this->get('session')->getFlashBag()->add('info', 'Livre bien supprimé');
+		return $this->redirect( $this->generateUrl('rx7book_index') );
 	}
 	
 	public function navAction($nombre)
@@ -97,7 +120,7 @@ class BookController extends Controller
 				array('id' => 9, 'titre' => 'Livre 9')
 		);
 	
-		return $this->render('Rx7BookBundle:Book:nav.html.twig', array(
+		return $this->render('Rx7BookBundle::nav.html.twig', array(
 				'liste_articles' => $liste // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
 		));
 	}
