@@ -25,11 +25,6 @@ framework:
     fragments:       ~
     http_method_override: true
 
-# Twig Configuration
-twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
-
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
@@ -71,3 +66,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        webmaster: %webmaster_name%
