@@ -11,5 +11,5 @@ parameters:
     mailer_user: null
     mailer_password: null
     locale: fr
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: IloveFinland
     webmaster_name: Roxanne7_
