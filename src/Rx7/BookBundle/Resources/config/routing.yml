@@ -1,6 +1,6 @@
 rx7book_index:
     path:      /{page}
-    defaults:  { _controller: "Rx7BookBundle:Book:index, page: 1" }
+    defaults:  { _controller: "Rx7BookBundle:Book:index", page: 1 }
     requirements:
         page: \d*
 

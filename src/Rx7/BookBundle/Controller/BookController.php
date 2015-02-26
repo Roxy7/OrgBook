@@ -7,25 +7,52 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
-	public function indexAction()
+	public function indexAction($page)
 	{
-		return new Response("Page d'accueil des livres");
+		if( $page < 1 )
+		{
+			// On dÃ©clenche une exception NotFoundHttpException
+			// Cela va afficher la page d'erreur 404 (on pourra personnaliser cette page plus tard d'ailleurs)
+			throw $this->createNotFoundException('Page inexistante (page = '.$page.')');
+		}
+		
+		return $this->render('Rx7BookBundle:Book:index.html.twig');
 	}
 
-	// La route fait appel à SdzBlogBundle:Blog:voir, on doit donc définir la méthode voirAction
-	// On donne à cette méthode l'argument $id, pour correspondre au paramètre {id} de la route
 	public function showAction($id)
 	{
-		// $id vaut 5 si l'on a appelé l'URL /blog/article/5
-
-		// Ici, on récupèrera depuis la base de données l'article correspondant à l'id $id
-		// Puis on passera l'article à la vue pour qu'elle puisse l'afficher
-
-		return new Response("Affichage de l'article d'id : ".$id.".");
+		
+		return $this->render('Rx7BookBundle:Book:show.html.twig', array(
+				'id' => $id,
+		));
 	}
 	
 	public function addAction()
 	{
-		return new Response("Ajout d'un livre");
+		
+		if( $this->get('request')->getMethod() == 'POST' )
+    	{
+	      	// Ici, on s'occupera de la crÃ©ation et de la gestion du formulaire
+	    	$this->get('session')->getFlashBag()->add('info', 'Article bien enregistrÃ©');
+	
+	    	// Le Â« flashBag Â» est ce qui contient les messages flash dans la session
+	    	// Il peut bien sÃ»r contenir plusieurs messages :
+	    	$this->get('session')->getFlashBag()->add('info', 'Oui oui, il est bien enregistrÃ© !');
+	
+	    	// Puis on redirige vers la page de visualisation de cet article
+	    	return $this->redirect( $this->generateUrl('rx7book_show', array('id' => 5)) );
+    	}
+    	
+    	return $this->render('Rx7BookBundle:Book:add.html.twig');
+	}
+	
+	public function updateAction()
+	{
+		return $this->render('Rx7BookBundle:Book:update.html.twig');
+	}
+	
+	public function deleteAction()
+	{
+		return $this->render('Rx7BookBundle:Book:delete.html.twig');
 	}
 }
