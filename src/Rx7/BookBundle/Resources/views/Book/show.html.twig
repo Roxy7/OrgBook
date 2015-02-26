@@ -1,21 +1,32 @@
 {% extends "Rx7BookBundle::layout.html.twig" %}
 
 {% block title %}
-  Voir - {{ parent() }}
+  Lecture d'un article - {{ parent() }}
 {% endblock %}
 
 {% block book_body %}
-    <h1>Visualisation d'un livre</h1>
 
-    <p>
-      {# On affiche tous les messages flash dont le nom est « info » #}
-      {% for message in app.session.flashbag.get('info') %}
-        <p>{{ message }}</p>
-      {% endfor %}
-    </p>
+  <h2>{{ book.titre }}</h2>
+  <i>Par {{ book.auteur }}, le {{ book.date|date('d/m/Y') }}</i>
 
-    <p>
-      Ici nous pourrons voir le livre ayant comme id : {{ id }}<br />
-      Mais pour l'instant, nous ne savons pas encore le faire, cela viendra !
-    </p>
+  <div class="well">
+    {{ book.contenu }}
+  </div>
+
+ 
+  <p>
+    <a href="{{ path('rx7book_index') }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <a href="{{ path('rx7book_update', {'id': book.id}) }}" class="btn">
+      <i class="icon-edit"></i>
+      Modifier l'article
+    </a>
+    <a href="{{ path('rx7book_delete', {'id': book.id}) }}" class="btn">
+      <i class="icon-trash"></i>
+      Supprimer l'article
+    </a>
+  </p>
+
 {% endblock %}

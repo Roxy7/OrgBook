@@ -46,8 +46,16 @@ class BookController extends Controller
 	public function showAction($id)
 	{
 		
+		$book = array(
+				'id'      => 1,
+				'titre'   => 'Mon weekend a Phi Phi Island !',
+				'auteur'  => 'winzou',
+				'contenu' => 'Ce weekend était trop bien. Blabla…',
+				'date'    => new \Datetime()
+		);
+		
 		return $this->render('Rx7BookBundle:Book:show.html.twig', array(
-				'id' => $id,
+				'book' => $book,
 		));
 	}
 	
