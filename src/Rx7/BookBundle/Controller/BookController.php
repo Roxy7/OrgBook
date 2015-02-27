@@ -5,6 +5,7 @@ namespace Rx7\BookBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Rx7\BookBundle\Entity\Book;
+use Rx7\BookBundle\Entity\Image;
 
 class BookController extends Controller
 {
@@ -69,6 +70,12 @@ class BookController extends Controller
 		$book->setTitle('La Huitième Couleur');
 		$book->setAuthor('Terry Pratchet');
 		$book->setText('super livre !');
+		
+		$image = new Image();
+		$image->setUrl('http://kemar.blogs.3dvf.com/files/2010/12/8c-625x1024.jpg');
+		$image->setAlt('Couverture de "La Huitième Couleur"');
+		
+		$book->setCover($image);
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($book);

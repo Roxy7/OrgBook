@@ -6,7 +6,13 @@
 
 {% block book_body %}
 
-  <h2>{{ book.title }}</h2>
+	<h2>
+		{# On vérifie qu'une image soit bien associée à l'article #}
+		  {% if book.cover is not null %}
+		    <img src="{{ book.cover.url }}" alt="{{ book.cover.alt }}" />
+		  {% endif %}  
+		{{ book.title }}
+	</h2>
   <i>Par {{ book.author }}, achetté le {{ book.purchaseDate|date('d/m/Y') }}</i>
 
   <div class="well">

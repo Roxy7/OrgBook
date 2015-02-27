@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
 	<buildpathentry kind="src" path="vendor"/>
-	<buildpathentry excluding="Rx7/BookBundle/Entity/" kind="src" path="src"/>
+	<buildpathentry excluding="Rx7/BookBundle/Entity/|Rx7/BookBundle/Entity/" kind="src" path="src"/>
+	<buildpathentry kind="src" path="src/Rx7/BookBundle/Entity"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 </buildpath>
