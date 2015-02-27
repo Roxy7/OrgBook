@@ -24,9 +24,9 @@ class Book
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="purchasedate", type="datetime")
      */
-    private $date;
+    private $purchaseDate;
 
     /**
      * @var string
@@ -49,39 +49,30 @@ class Book
      */
     private $text;
 
+    /**
+     * @ORM\Column(name="read", type="boolean")
+     */
+    private $read;
 
     /**
      * Get id
      *
      * @return integer 
      */
+    
+    public function __construct()
+    {
+    	$this->purchaseDate = new \Datetime();
+    	$this->read = false;
+    }
+    
+    
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     * @return Book
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
 
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime 
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
 
     /**
      * Set titre
@@ -150,5 +141,51 @@ class Book
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set purchaseDate
+     *
+     * @param \DateTime $purchaseDate
+     * @return Book
+     */
+    public function setPurchaseDate($purchaseDate)
+    {
+        $this->purchaseDate = $purchaseDate;
+
+        return $this;
+    }
+
+    /**
+     * Get purchaseDate
+     *
+     * @return \DateTime 
+     */
+    public function getPurchaseDate()
+    {
+        return $this->purchaseDate;
+    }
+
+    /**
+     * Set read
+     *
+     * @param boolean $read
+     * @return Book
+     */
+    public function setRead($read)
+    {
+        $this->read = $read;
+
+        return $this;
+    }
+
+    /**
+     * Get read
+     *
+     * @return boolean 
+     */
+    public function getRead()
+    {
+        return $this->read;
     }
 }
