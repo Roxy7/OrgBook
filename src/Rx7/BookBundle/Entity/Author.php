@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Author
 {
+	/**
+	 * @ORM\OneToMany(targetEntity="Rx7\BookBundle\Entity\Book", mappedBy="author")
+	 */
+	private $books;
+	
     /**
      * @var integer
      *
@@ -90,5 +95,45 @@ class Author
     public function getLastName()
     {
         return $this->lastName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add books
+     *
+     * @param \Rx7\BookBundle\Entity\Book $book
+     * @return Author
+     */
+    public function addBook(\Rx7\BookBundle\Entity\Book $book)
+    {
+        $this->books[] = $book;
+		$book->setAuthor($this);
+        return $this;
+    }
+
+    /**
+     * Remove books
+     *
+     * @param \Rx7\BookBundle\Entity\Book $book
+     */
+    public function removeBook(\Rx7\BookBundle\Entity\Book $book)
+    {
+            	$this->books->removeElement($book);
+    }
+
+    /**
+     * Get books
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

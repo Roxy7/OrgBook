@@ -18,7 +18,7 @@ class Book
 	private $cover;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="Rx7\BookBundle\Entity\Author")
+	 * @ORM\ManyToOne(targetEntity="Rx7\BookBundle\Entity\Author", inversedBy="books")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $author;

@@ -128,10 +128,7 @@ class BookController extends Controller
     // Étape 2 : On déclenche l'enregistrement
     $em->flush();
 
-    return new Response('OK');
-		
-
-		return $this->render('Rx7BookBundle:Book:update.html.twig', array(
+		return $this->render('Rx7BookBundle:Book:show.html.twig', array(
 				'book' => $book
 		));
 	}
@@ -171,7 +168,9 @@ class BookController extends Controller
     // On déclenche la modification
     $em->flush();
 
-    return new Response('OK');
+    return $this->render('Rx7BookBundle:Book:show.html.twig', array(
+				'book' => $book
+		));
 	}
 	
 	public function navAction($nombre)
