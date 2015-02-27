@@ -22,19 +22,19 @@ class BookController extends Controller
 
 		$books = array(
 				array(
-						'titre'   => 'Mon weekend a Phi Phi Island !',
+						'titre'   => 'Livre 1',
 						'id'      => 1,
 						'auteur'  => 'winzou',
 						'contenu' => 'Ce weekend était trop bien. Blabla…',
 						'date'    => new \Datetime()),
 				array(
-						'titre'   => 'Repetition du National Day de Singapour',
+						'titre'   => 'Livre 2',
 						'id'      => 2,
 						'auteur' => 'winzou',
 						'contenu' => 'Bientôt prêt pour le jour J. Blabla…',
 						'date'    => new \Datetime()),
 				array(
-						'titre'   => 'Chiffre d\'affaire en hausse',
+						'titre'   => 'Livre 3',
 						'id'      => 3,
 						'auteur' => 'M@teo21',
 						'contenu' => '+500% sur 1 an, fabuleux. Blabla…',
@@ -101,33 +101,86 @@ class BookController extends Controller
 	
 	public function updateAction($id)
 	{
-		$book = array(
-				'id'      => 1,
-				'titre'   => 'Mon weekend a Phi Phi Island !',
-				'auteur'  => 'winzou',
-				'contenu' => 'Ce weekend était trop bien. Blabla…',
-				'date'    => new \Datetime()
-		);
+		// On récupère l'EntityManager
+    $em = $this->getDoctrine()
+               ->getManager();
+
+    // On récupère l'entité correspondant à l'id $id
+    $book = $em->getRepository('Rx7BookBundle:Book')
+                  ->find($id);
+
+    if ($book === null) {
+      throw $this->createNotFoundException('Book[id='.$id.'] inexistant.');
+    }
+
+    // On récupère toutes les catégories :
+    $list_categories = $em->getRepository('Rx7BookBundle:Category')
+                           ->findAll();
+
+    // On boucle sur les catégories pour les lier à l'article
+    foreach($list_categories as $category)
+    {
+      $book->addCategory($category);
+    }
+
+    // Inutile de persister l'article, on l'a récupéré avec Doctrine
+
+    // Étape 2 : On déclenche l'enregistrement
+    $em->flush();
+
+    return new Response('OK');
 		
-		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
+
 		return $this->render('Rx7BookBundle:Book:update.html.twig', array(
 				'book' => $book
 		));
 	}
 	
-	public function deleteAction()
+	public function deleteAction($id)
 	{
-		$this->get('session')->getFlashBag()->add('info', 'Livre bien supprimé');
-		return $this->redirect( $this->generateUrl('rx7book_index') );
+		// On récupère l'EntityManager
+    $em = $this->getDoctrine()
+               ->getManager();
+
+    // On récupère l'entité correspondant à l'id $id
+    $book = $em->getRepository('Rx7BookBundle:Book')
+                  ->find($id);
+
+    if ($book === null) {
+      throw $this->createNotFoundException('Book[id='.$id.'] inexistant.');
+    }
+
+    // On récupère toutes les catégories :
+    $list_categories = $em->getRepository('Rx7BookBundle:Category')
+                           ->findAll();
+
+    // On enlève toutes ces catégories de l'article
+    foreach($list_categories as $category)
+    {
+      // On fait appel à la méthode removeCategorie() dont on a parlé plus haut
+      // Attention ici, $categorie est bien une instance de Categorie, et pas seulement un id
+      $book->removeCategory($category);
+    }
+
+    // On n'a pas modifié les catégories : inutile de les persister
+
+    // On a modifié la relation Article - Categorie
+    // Il faudrait persister l'entité propriétaire pour persister la relation
+    // Or l'article a été récupéré depuis Doctrine, inutile de le persister
+
+    // On déclenche la modification
+    $em->flush();
+
+    return new Response('OK');
 	}
 	
 	public function navAction($nombre)
 	{
 		// On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
 		$liste = array(
+				array('id' => 1, 'titre' => 'Livre 1'),
 				array('id' => 2, 'titre' => 'Livre 2'),
-				array('id' => 5, 'titre' => 'Livre 5'),
-				array('id' => 9, 'titre' => 'Livre 9')
+				array('id' => 3, 'titre' => 'Livre 3')
 		);
 	
 		return $this->render('Rx7BookBundle::nav.html.twig', array(

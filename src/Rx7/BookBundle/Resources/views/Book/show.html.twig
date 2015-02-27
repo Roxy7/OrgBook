@@ -14,11 +14,22 @@
 		  </div>
 
 		  {% endif %}  
-		<div class="col-sm-6 col-md-8 col-lg-10">{{ book.title }}</div>
+		<div class="col-sm-6 col-md-8 col-lg-10"><h2>{{ book.title }}</h2>
+		
+		{% if book.categories.count > 0 %}
+    Catégories :
+    {% for category in book.categories %}
+      {{ category.name }}
+      {% if not loop.last %} - {% endif %}
+    {% endfor %}
+  {% endif %}
+		</div>
 	</div>
 	
   <i>Par {{ book.author.FirstName }} {{ book.author.lastName }}, achetté le {{ book.purchaseDate|date('d/m/Y') }}</i>
 
+  
+  
   <div class="well">
     {{ book.text }}
   </div>
