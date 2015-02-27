@@ -6,14 +6,18 @@
 
 {% block book_body %}
 
-	<h2>
+	<div class="row">
 		{# On vérifie qu'une image soit bien associée à l'article #}
 		  {% if book.cover is not null %}
-		    <img src="{{ book.cover.url }}" alt="{{ book.cover.alt }}" />
+		  <div class="col-sm-6 col-md-4 col-lg-2">
+		    <img src="{{ book.cover.url }}" alt="{{ book.cover.alt }}" class="thumbnail img-responsive" />
+		  </div>
+
 		  {% endif %}  
-		{{ book.title }}
-	</h2>
-  <i>Par {{ book.author }}, achetté le {{ book.purchaseDate|date('d/m/Y') }}</i>
+		<div class="col-sm-6 col-md-8 col-lg-10">{{ book.title }}</div>
+	</div>
+	
+  <i>Par {{ book.author.FirstName }} {{ book.author.lastName }}, achetté le {{ book.purchaseDate|date('d/m/Y') }}</i>
 
   <div class="well">
     {{ book.text }}
