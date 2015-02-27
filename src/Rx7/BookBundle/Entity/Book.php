@@ -23,6 +23,11 @@ class Book
 	 */
 	private $author;
 	
+	/**
+	 * @ORM\ManyToMany(targetEntity="Rx7\BookBundle\Entity\Category", cascade={"persist"})
+	 */
+	private $categories;
+	
     /**
      * @var integer
      *
@@ -65,6 +70,7 @@ class Book
     {
     	$this->purchaseDate = new \Datetime();
     	$this->bookRead = false;
+    	$this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -216,5 +222,38 @@ class Book
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Rx7\BookBundle\Entity\Category $category
+     * @return Book
+     */
+    public function addCategory(\Rx7\BookBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Rx7\BookBundle\Entity\Category $category
+     */
+    public function removeCategory(\Rx7\BookBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
