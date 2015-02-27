@@ -4,6 +4,7 @@ namespace Rx7\BookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Rx7\BookBundle\Entity\Book;
 
 class BookController extends Controller
 {
@@ -46,13 +47,15 @@ class BookController extends Controller
 	public function showAction($id)
 	{
 		
-		$book = array(
-				'id'      => 1,
-				'titre'   => 'Mon weekend a Phi Phi Island !',
-				'auteur'  => 'winzou',
-				'contenu' => 'Ce weekend était trop bien. Blabla…',
-				'date'    => new \Datetime()
-		);
+		$repository = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('Rx7BookBundle:Book');
+		$book = $repository->find($id);
+		
+		if($book === null)
+		{
+			throw $this->createNotFoundException('Book[id='.$id.'] inexistant.');
+		}
 		
 		return $this->render('Rx7BookBundle:Book:show.html.twig', array(
 				'book' => $book,
@@ -62,31 +65,25 @@ class BookController extends Controller
 	public function addAction()
 	{
 		
+		$book = new Book();
+		$book->setTitle('La Huitième Couleur');
+		$book->setAuthor('Terry Pratchet');
+		$book->setText('super livre !');
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($book);
+		$em->flush();
+		
+		
 		if( $this->get('request')->getMethod() == 'POST' )
     	{
-	      	// Ici, on s'occupera de la création et de la gestion du formulaire
 	    	$this->get('session')->getFlashBag()->add('info', 'Livre bien enregistré');
-	
-	    	// Le « flashBag » est ce qui contient les messages flash dans la session
-	    	// Il peut bien sûr contenir plusieurs messages :
-	    	$this->get('session')->getFlashBag()->add('info', 'Oui oui, il est bien enregistré !');
-	
-	    	// Puis on redirige vers la page de visualisation de cet article
-	    	return $this->redirect( $this->generateUrl('rx7book_show', array('id' => 5)) );
+	    	return $this->redirect( $this->generateUrl('rx7book_show', array('id' => $book->getId())) );
     	}
     	
-    	$book = array(
-				'id'      => 1,
-				'titre'   => 'Mon weekend a Phi Phi Island !',
-				'auteur'  => 'winzou',
-				'contenu' => 'Ce weekend était trop bien. Blabla…',
-				'date'    => new \Datetime()
-		);
 		
 		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
-		return $this->render('Rx7BookBundle:Book:add.html.twig', array(
-				'book' => $book
-		));
+		return $this->render('Rx7BookBundle:Book:add.html.twig');
 	}
 	
 	public function updateAction($id)

@@ -6,11 +6,11 @@
 
 {% block book_body %}
 
-  <h2>{{ book.titre }}</h2>
-  <i>Par {{ book.auteur }}, le {{ book.date|date('d/m/Y') }}</i>
+  <h2>{{ book.title }}</h2>
+  <i>Par {{ book.author }}, achetté le {{ book.purchaseDate|date('d/m/Y') }}</i>
 
   <div class="well">
-    {{ book.contenu }}
+    {{ book.text }}
   </div>
 
  

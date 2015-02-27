@@ -50,23 +50,23 @@ class Book
     private $text;
 
     /**
-     * @ORM\Column(name="read", type="boolean")
+     * @ORM\Column(name="bookRead", type="boolean")
      */
-    private $read;
+    private $bookRead;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
+    
     
     public function __construct()
     {
     	$this->purchaseDate = new \Datetime();
-    	$this->read = false;
+    	$this->bookRead = false;
     }
     
-    
+    /**
+     * Get id
+     *
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
@@ -75,26 +75,26 @@ class Book
 
 
     /**
-     * Set titre
+     * Set title
      *
-     * @param string $titre
+     * @param string $title
      * @return Book
      */
-    public function setTitle($titre)
+    public function setTitle($title)
     {
-        $this->titre = $titre;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get titre
+     * Get title
      *
      * @return string 
      */
     public function getTitle()
     {
-        return $titre->titre;
+        return $this->title;
     }
 
     /**
@@ -167,25 +167,25 @@ class Book
     }
 
     /**
-     * Set read
+     * Set bookRead
      *
-     * @param boolean $read
+     * @param boolean $bookRead
      * @return Book
      */
-    public function setRead($read)
+    public function setBookRead($bookRead)
     {
-        $this->read = $read;
+        $this->bookRead = $bookRead;
 
         return $this;
     }
 
     /**
-     * Get read
+     * Get bookRead
      *
      * @return boolean 
      */
-    public function getRead()
+    public function getBookRead()
     {
-        return $this->read;
+        return $this->bookRead;
     }
 }
