@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+	/**
+	 * @ORM\OneToOne(targetEntity="Rx7\BookBundle\Entity\Image", cascade={"persist"})
+	 */
+	private $cover;
+	
     /**
      * @var integer
      *
@@ -187,5 +192,28 @@ class Book
     public function getBookRead()
     {
         return $this->bookRead;
+    }
+
+    /**
+     * Set cover
+     *
+     * @param \Rx7\BookBundle\Entity\Image $cover
+     * @return Book
+     */
+    public function setCover(\Rx7\BookBundle\Entity\Image $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \Rx7\BookBundle\Entity\Image 
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 }
