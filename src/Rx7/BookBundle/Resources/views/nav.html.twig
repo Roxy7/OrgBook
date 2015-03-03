@@ -1,7 +1,7 @@
-<h3>Les derniers articles</h3>
+<h3>Les derniers livres</h3>
 
 <ul class="nav nav-pills nav-stacked">
-  {% for article in liste_articles %}
-    <li role="presentation""><a href="{{ path('rx7book_show', {'id': article.id}) }}">{{ article.titre }}</a></li>
+  {% for book in book_list %}
+    <li role="presentation""><a href="{{ path('rx7book_show', {'id': book.id}) }}">{{ book.title }}</a></li>
   {% endfor %}
 </ul>

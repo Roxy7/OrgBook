@@ -20,26 +20,10 @@ class BookController extends Controller
 		}
 		
 
-		$books = array(
-				array(
-						'titre'   => 'Livre 1',
-						'id'      => 1,
-						'auteur'  => 'winzou',
-						'contenu' => 'Ce weekend était trop bien. Blabla…',
-						'date'    => new \Datetime()),
-				array(
-						'titre'   => 'Livre 2',
-						'id'      => 2,
-						'auteur' => 'winzou',
-						'contenu' => 'Bientôt prêt pour le jour J. Blabla…',
-						'date'    => new \Datetime()),
-				array(
-						'titre'   => 'Livre 3',
-						'id'      => 3,
-						'auteur' => 'M@teo21',
-						'contenu' => '+500% sur 1 an, fabuleux. Blabla…',
-						'date'    => new \Datetime())
-		);
+		$em = $this->getDoctrine()
+               ->getManager();
+		$books = $em->getRepository('Rx7BookBundle:Book')
+		->findAll();
 		
 		return $this->render('Rx7BookBundle:Book:index.html.twig', array(
 				'books' => $books
@@ -175,15 +159,18 @@ class BookController extends Controller
 	
 	public function navAction($nombre)
 	{
-		// On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
-		$liste = array(
-				array('id' => 1, 'titre' => 'Livre 1'),
-				array('id' => 2, 'titre' => 'Livre 2'),
-				array('id' => 3, 'titre' => 'Livre 3')
-		);
+		
+		$em = $this->getDoctrine()
+               ->getManager();
+		$books = $em->getRepository('Rx7BookBundle:Book')
+		->findBy(array('bookRead' => 'true', 'bookRead' => 'false'),
+                 array('purchaseDate' => 'desc'),
+                 $nombre,
+                 0);
+		
 	
 		return $this->render('Rx7BookBundle::nav.html.twig', array(
-				'liste_articles' => $liste // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
+				'book_list' => $books // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
 		));
 	}
 }

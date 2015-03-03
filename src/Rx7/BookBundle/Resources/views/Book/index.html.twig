@@ -11,9 +11,9 @@
   <ul>
     {% for book in books %}
       <li>
-        <a href="{{ path('rx7book_show', {'id': book.id}) }}">{{ book.titre }}</a>
-        par {{ book.auteur }},
-        le {{ book.date|date('d/m/Y') }}
+        <a href="{{ path('rx7book_show', {'id': book.id}) }}">{{ book.title }}</a>
+        par {{ book.author.FirstName }} {{ book.author.lastName }},
+        acheté le {{ book.purchaseDate|date('d/m/Y') }}
       </li>
     {% else %}
       <li>Pas (encore !) d'articles</li>
