@@ -2,5 +2,31 @@
 
 {# Ici on laisse vide la vue pour l'instant, on la comblera plus tard lorsqu'on saura afficher un formulaire #}
 <div class="well">
-  Ici se trouvera le formulaire.
+	<form action="{{ path('rx7book_add') }}" method="post" {{ form_enctype(form) }}>
+	{# Les erreurs générales du formulaire. #}
+	{{ form_errors(form) }}
+  
+	
+	<div>
+		{{ form_label(form.title, "Titre du livre") }}
+		
+		{# Affichage des erreurs pour ce champ précis. #}
+	 	{{ form_errors(form.title) }}
+	
+	  	{# Génération de l input. #}
+	  	{{ form_widget(form.title) }}
+	</div>
+	
+	<div>
+	  {{ form_label(form.text, "Contenu de l'article") }}
+	  {{ form_errors(form.text) }}
+	  {{ form_widget(form.text) }}
+	</div>
+	
+	{{ form_rest(form) }}
+	
+    <input type="submit" class="btn btn-primary" />
+    
+    
+  </form>
 </div>

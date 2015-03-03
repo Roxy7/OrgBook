@@ -51,6 +51,7 @@ class BookController extends Controller
 	public function addAction()
 	{
 		
+		/*
 		$book = new Book();
 		$book->setTitle('La Huitième Couleur');
 		$book->setText('super livre !');
@@ -70,17 +71,47 @@ class BookController extends Controller
 		$em->persist($book);
 		$em->persist($author);
 		$em->flush();
+		*/
+		$book = new Book();
+		$formBuilder = $this->createFormBuilder($book);
+		
+		$formBuilder
+			->add('title', 'text')
+			->add('text', 'textarea')
+			->add('bookRead', 'checkbox');
+
+		$form = $formBuilder->getForm();
+		$request = $this->get('request');
 		
 		
-		if( $this->get('request')->getMethod() == 'POST' )
+		if($request->getMethod() == 'POST')
     	{
-	    	$this->get('session')->getFlashBag()->add('info', 'Livre bien enregistré');
-	    	return $this->redirect( $this->generateUrl('rx7book_show', array('id' => $book->getId())) );
+    		$form->bind($request);
+    		
+    		// On vérifie que les valeurs entrées sont correctes
+    		// (Nous verrons la validation des objets en détail dans le prochain chapitre)
+    		if ($form->isValid()) {
+    			
+    			$em = $this->getDoctrine()
+    			->getManager();
+    			
+    			$author = $em->getRepository('Rx7BookBundle:Author')
+    			->find('1');
+    			
+    			$book->setAuthor($author);
+    			// On l'enregistre notre objet $article dans la base de données
+    			$em = $this->getDoctrine()->getManager();
+    			$em->persist($book);
+    			$em->flush();
+    		
+    			// On redirige vers la page de visualisation de l'article nouvellement créé
+    			return $this->redirect($this->generateUrl('rx7book_show', array('id' => $book->getId())));
+    		}
     	}
     	
 		
 		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
-		return $this->render('Rx7BookBundle:Book:add.html.twig');
+		return $this->render('Rx7BookBundle:Book:add.html.twig', array('form' => $form->createView()));
 	}
 	
 	public function updateAction($id)
