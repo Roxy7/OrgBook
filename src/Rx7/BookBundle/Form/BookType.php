@@ -5,6 +5,8 @@ namespace Rx7\BookBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Rx7\BookBundle\Form\ImageType;
+use Rx7\BookBundle\Entity\Category;
 
 class BookType extends AbstractType
 {
@@ -19,9 +21,17 @@ class BookType extends AbstractType
             ->add('title',       	'text')
             ->add('text',     	'textarea')
             ->add('bookRead', 	'checkbox', array('required' => false))
-            /*->add('cover')
-            ->add('author')
-            ->add('categories')*/
+            ->add('cover',		new ImageType())
+            ->add('author',		'entity', array(
+            		'class' => 'Rx7BookBundle:Author',
+            		'property' => 'lastName',
+            		'multiple' => false)
+            		)
+            ->add('categories',		'entity', array(
+            		'class' => 'Rx7BookBundle:Category',
+            		'property' => 'name',
+            		'multiple' => true)
+            )
         ;
     }
     

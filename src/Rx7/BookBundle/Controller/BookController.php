@@ -8,6 +8,7 @@ use Rx7\BookBundle\Entity\Book;
 use Rx7\BookBundle\Entity\Image;
 use Rx7\BookBundle\Entity\Author;
 use Rx7\BookBundle\Form\BookType;
+use Rx7\BookBundle\Form\ImageType;
 
 class BookController extends Controller
 {
