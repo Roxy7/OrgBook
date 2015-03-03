@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookRepository extends EntityRepository
 {
+	public function findLastBooks($number){
+		$qb = $this->_em->createQueryBuilder();
+		$qb->select('b')
+			->from('Rx7BookBundle:book', 'b')
+			->orderBy('b.purchaseDate','DESC')
+			->setMaxResults($number);
+		return $qb->getQuery()->getResult();
+	}
+	
 }

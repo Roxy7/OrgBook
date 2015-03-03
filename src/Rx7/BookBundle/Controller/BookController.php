@@ -157,17 +157,13 @@ class BookController extends Controller
 		));
 	}
 	
-	public function navAction($nombre)
+	public function navAction($number)
 	{
 		
 		$em = $this->getDoctrine()
                ->getManager();
 		$books = $em->getRepository('Rx7BookBundle:Book')
-		->findBy(array('bookRead' => 'true', 'bookRead' => 'false'),
-                 array('purchaseDate' => 'desc'),
-                 $nombre,
-                 0);
-		
+		->findLastBooks($number);
 	
 		return $this->render('Rx7BookBundle::nav.html.twig', array(
 				'book_list' => $books // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
