@@ -1,5 +1,5 @@
 <div class="well">
-	<form action="{{ path('rx7book_add') }}" method="post" {{ form_enctype(form) }}>
+	<form action="{{ path('rx7book_update', {'id': book.id}) }}" method="post" {{ form_enctype(form) }}>
 	{# Les erreurs générales du formulaire. #}
 	{{ form_errors(form) }}
   

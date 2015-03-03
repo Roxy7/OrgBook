@@ -6,22 +6,22 @@
 
 {% block book_body %}
 
-  <h2>Modifier un livre</h2>
+  <h2>Modification du livre : {{ book.title }}</h2>
 
-  {% include "Rx7BookBundle:Book:form.html.twig" %}
-
-  <p>
+    <p>
     Vous éditez un article déjà existant,
     ne le changez pas trop pour éviter
     aux membres de ne pas comprendre
     ce qu'il se passe.
   </p>
-
-  <p>
-    <a href="{{ path('rx7book_show', {'id': book.id}) }}" class="btn">
-      <i class="icon-chevron-left"></i>
-      Retour au livre
+    <p>
+    <a href="{{ path('rx7book_show', {'id': book.id}) }}" class="btn btn-warning" role="button">
+     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Annuler
     </a>
   </p>
+  
+  {% include "Rx7BookBundle:Book:formEdit.html.twig" %}
+
+
 
 {% endblock %}

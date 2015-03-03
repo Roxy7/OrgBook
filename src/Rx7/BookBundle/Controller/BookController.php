@@ -8,6 +8,7 @@ use Rx7\BookBundle\Entity\Book;
 use Rx7\BookBundle\Entity\Image;
 use Rx7\BookBundle\Entity\Author;
 use Rx7\BookBundle\Form\BookType;
+use Rx7\BookBundle\Form\BookEditType;
 use Rx7\BookBundle\Form\ImageType;
 
 class BookController extends Controller
@@ -67,14 +68,6 @@ class BookController extends Controller
     		// (Nous verrons la validation des objets en détail dans le prochain chapitre)
     		if ($form->isValid()) {
     			
-    			$em = $this->getDoctrine()
-    			->getManager();
-    			
-    			$author = $em->getRepository('Rx7BookBundle:Author')
-    			->find('1');
-    			
-    			$book->setAuthor($author);
-    			// On l'enregistre notre objet $article dans la base de données
     			$em = $this->getDoctrine()->getManager();
     			$em->persist($book);
     			$em->flush();
@@ -102,25 +95,27 @@ class BookController extends Controller
     if ($book === null) {
       throw $this->createNotFoundException('Book[id='.$id.'] inexistant.');
     }
-
-    // On récupère toutes les catégories :
-    $list_categories = $em->getRepository('Rx7BookBundle:Category')
-                           ->findAll();
-
-    // On boucle sur les catégories pour les lier à l'article
-    foreach($list_categories as $category)
+    
+    $form = $this->createForm(new BookEditType, $book);
+    $request = $this->get('request');
+    
+    
+    if($request->getMethod() == 'POST')
     {
-      $book->addCategory($category);
+    	$form->bind($request);
+
+    	if ($form->isValid()) {
+    		 
+    		$em->flush();
+    
+    		// On redirige vers la page de visualisation de l'article nouvellement créé
+    		return $this->redirect($this->generateUrl('rx7book_show', array('id' => $book->getId())));
+    	}
     }
 
-    // Inutile de persister l'article, on l'a récupéré avec Doctrine
 
-    // Étape 2 : On déclenche l'enregistrement
-    $em->flush();
-
-		return $this->render('Rx7BookBundle:Book:show.html.twig', array(
-				'book' => $book
-		));
+		return $this->render('Rx7BookBundle:Book:update.html.twig', array('form' => $form->createView(),
+																		  'book' => $book));
 	}
 	
 	public function deleteAction($id)

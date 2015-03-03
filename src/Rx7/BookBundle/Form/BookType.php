@@ -17,7 +17,7 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('purchaseDate', 	'date')
+            ->add('purchaseDate', 	'datetime')
             ->add('title',       	'text')
             ->add('text',     	'textarea')
             ->add('bookRead', 	'checkbox', array('required' => false))
