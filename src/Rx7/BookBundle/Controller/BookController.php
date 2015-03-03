@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Rx7\BookBundle\Entity\Book;
 use Rx7\BookBundle\Entity\Image;
 use Rx7\BookBundle\Entity\Author;
+use Rx7\BookBundle\Form\BookType;
 
 class BookController extends Controller
 {
@@ -51,36 +52,9 @@ class BookController extends Controller
 	public function addAction()
 	{
 		
-		/*
 		$book = new Book();
-		$book->setTitle('La Huitième Couleur');
-		$book->setText('super livre !');
-		
-		$image = new Image();
-		$image->setUrl('http://kemar.blogs.3dvf.com/files/2010/12/8c-625x1024.jpg');
-		$image->setAlt('Couverture de "La Huitième Couleur"');
-		
-		$author = new Author();
-		$author->setFirstName('Terry');
-		$author->setLastName('Pratchet');
-		
-		$book->setCover($image);
-		$book->setAuthor($author);
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($book);
-		$em->persist($author);
-		$em->flush();
-		*/
-		$book = new Book();
-		$formBuilder = $this->createFormBuilder($book);
-		
-		$formBuilder
-			->add('title', 'text')
-			->add('text', 'textarea')
-			->add('bookRead', 'checkbox');
 
-		$form = $formBuilder->getForm();
+		$form = $this->createForm(new BookType, $book);
 		$request = $this->get('request');
 		
 		
