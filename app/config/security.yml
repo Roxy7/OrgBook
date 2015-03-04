@@ -1,17 +1,22 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         
     providers:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    auteur:  { password: pass, roles: [ 'ROLE_AUTEUR' ] }
+                    moderateur:  { password: pass, roles: [ 'ROLE_MODERATEUR' ] }
+                    admin: { password: pass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:

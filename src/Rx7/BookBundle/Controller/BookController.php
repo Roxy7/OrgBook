@@ -10,6 +10,8 @@ use Rx7\BookBundle\Entity\Author;
 use Rx7\BookBundle\Form\BookType;
 use Rx7\BookBundle\Form\BookEditType;
 use Rx7\BookBundle\Form\ImageType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 
 class BookController extends Controller
 {
@@ -51,9 +53,12 @@ class BookController extends Controller
 		));
 	}
 	
+	/**
+	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
+	 */
 	public function addAction()
 	{
-		
+			
 		$book = new Book();
 
 		$form = $this->createForm(new BookType, $book);
@@ -121,6 +126,9 @@ class BookController extends Controller
 																		  'book' => $book));
 	}
 	
+	/**
+	 * @Secure(roles="ROLE_ADMIN")
+	 */
 	public function deleteAction(Book $book)
 	{
 		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
