@@ -73,3 +73,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         webmaster: %webmaster_name%
+        
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    Rx7\UserBundle\Entity\User

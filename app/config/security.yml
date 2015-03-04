@@ -4,7 +4,7 @@ jms_security_extra:
 
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Symfony\Component\Security\Core\User\User: sha512
         Rx7\UserBundle\Entity\User: plaintext
 
     role_hierarchy:
@@ -13,7 +13,7 @@ security:
         
     providers:
         main:
-             entity: { class: Rx7\UserBundle\Entity\User, property: username }
+             id: fos_user.user_provider.username
 
     firewalls:
         dev:
@@ -28,6 +28,8 @@ security:
                 check_path:    login_check
             logout:
                 path:    logout
-                target:    /book  
+                target:    /book
+            remember_me:
+                key:        %secret%  
 
 
