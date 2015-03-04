@@ -4,12 +4,14 @@ namespace Rx7\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Book
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Rx7\BookBundle\Entity\BookRepository")
+ * @UniqueEntity(fields="title", message="Un livre existe déjà avec ce titre.")
  */
 class Book
 {
