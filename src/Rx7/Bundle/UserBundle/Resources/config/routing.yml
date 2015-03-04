@@ -1,3 +1,0 @@
-rx7_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: Rx7UserBundle:Default:index }
