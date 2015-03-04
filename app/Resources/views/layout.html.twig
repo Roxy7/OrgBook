@@ -27,6 +27,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">OrgBook</a>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -36,6 +37,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
     
      
      
@@ -60,7 +62,13 @@
       	
       			{{ render(controller("Rx7BookBundle:Book:nav", {'number': 5})) }}
 			</div>
+			              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    		Connecté en tant que {{ app.user.username }} - <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+			{% else %}
+    		<a href="{{ path('fos_user_security_login') }}">Connexion</a>
+		{% endif %}
         	<div id="content" class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+        	
 	          {% block body %}
 	          {% endblock %}
         	</div>
