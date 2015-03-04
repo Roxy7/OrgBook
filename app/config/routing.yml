@@ -1,3 +1,7 @@
+rx7_user:
+    resource: "@Rx7UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 index:
     path:      /
     defaults:  { _controller: "Rx7BookBundle:Book:index", page: 1 }
@@ -10,3 +14,13 @@ rx7_book:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+login:
+    pattern:   /login
+    defaults:  { _controller: "Rx7UserBundle:Security:login" }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
