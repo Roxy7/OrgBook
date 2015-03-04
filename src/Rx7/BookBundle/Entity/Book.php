@@ -3,6 +3,7 @@
 namespace Rx7\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
@@ -20,6 +21,7 @@ class Book
 	/**
 	 * @ORM\ManyToOne(targetEntity="Rx7\BookBundle\Entity\Author", inversedBy="books")
 	 * @ORM\JoinColumn(nullable=false)
+	 * @Assert\Valid()
 	 */
 	private $author;
 	
@@ -41,6 +43,7 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="purchasedate", type="datetime")
+     * @Assert\DateTime()
      */
     private $purchaseDate;
 
@@ -48,6 +51,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(
+     * 		min = "3")
      */
     private $title;
 
