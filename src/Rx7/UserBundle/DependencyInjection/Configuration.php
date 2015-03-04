@@ -1,6 +1,6 @@
 <?php
 
-namespace Rx7\Bundle\UserBundle\DependencyInjection;
+namespace Rx7\UserBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

@@ -1,4 +1,4 @@
 services:
 #    rx7_user.example:
-#        class: Rx7\Bundle\UserBundle\Example
+#        class: Rx7\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

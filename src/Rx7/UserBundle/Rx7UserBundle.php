@@ -1,6 +1,6 @@
 <?php
 
-namespace Rx7\Bundle\UserBundle;
+namespace Rx7\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

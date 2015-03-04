@@ -1,6 +1,6 @@
 <?php
 
-namespace Rx7\Bundle\UserBundle\DependencyInjection;
+namespace Rx7\UserBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
