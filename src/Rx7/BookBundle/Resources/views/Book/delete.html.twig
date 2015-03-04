@@ -1,0 +1,25 @@
+{% extends "Rx7BookBundle::layout.html.twig" %}
+
+{% block title %}
+  Supprimer un livre - {{ parent() }}
+{% endblock %}
+
+{% block book_body %}
+
+  <h2>Supprimer un livre</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer le livre "{{ book.title }}" ?
+  </p>
+
+  {# On met l'id de l'article dans la route de l'action du formulaire #}
+  <form action="{{ path('rx7book_delete', {'id': book.id}) }}" method="post">
+    <a href="{{ path('rx7book_show', {'id': book.id}) }}" class="btn">
+      <i class="icon-chevron-left"></i>
+      Retour au livre
+    </a>
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}

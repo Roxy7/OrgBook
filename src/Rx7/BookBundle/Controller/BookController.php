@@ -110,6 +110,7 @@ class BookController extends Controller
     		 
     		$em->flush();
     
+    		$this->get('session')->getFlashBag()->add('info', 'Livre bien modifié');
     		// On redirige vers la page de visualisation de l'article nouvellement créé
     		return $this->redirect($this->generateUrl('rx7book_show', array('id' => $book->getId())));
     	}
@@ -120,43 +121,34 @@ class BookController extends Controller
 																		  'book' => $book));
 	}
 	
-	public function deleteAction($id)
+	public function deleteAction(Book $book)
 	{
-		// On récupère l'EntityManager
-    $em = $this->getDoctrine()
-               ->getManager();
-
-    // On récupère l'entité correspondant à l'id $id
-    $book = $em->getRepository('Rx7BookBundle:Book')
-                  ->find($id);
-
-    if ($book === null) {
-      throw $this->createNotFoundException('Book[id='.$id.'] inexistant.');
-    }
-
-    // On récupère toutes les catégories :
-    $list_categories = $em->getRepository('Rx7BookBundle:Category')
-                           ->findAll();
-
-    // On enlève toutes ces catégories de l'article
-    foreach($list_categories as $category)
-    {
-      // On fait appel à la méthode removeCategorie() dont on a parlé plus haut
-      // Attention ici, $categorie est bien une instance de Categorie, et pas seulement un id
-      $book->removeCategory($category);
-    }
-
-    // On n'a pas modifié les catégories : inutile de les persister
-
-    // On a modifié la relation Article - Categorie
-    // Il faudrait persister l'entité propriétaire pour persister la relation
-    // Or l'article a été récupéré depuis Doctrine, inutile de le persister
-
-    // On déclenche la modification
-    $em->flush();
-
-    return $this->render('Rx7BookBundle:Book:show.html.twig', array(
-				'book' => $book
+		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
+		// Cela permet de protéger la suppression d'article contre cette faille
+		$form = $this->createFormBuilder()->getForm();
+		
+		$request = $this->getRequest();
+		if ($request->getMethod() == 'POST') {
+			$form->bind($request);
+		
+			if ($form->isValid()) {
+				// On supprime l'article
+				$em = $this->getDoctrine()->getManager();
+				$em->remove($book);
+				$em->flush();
+		
+				// On définit un message flash
+				$this->get('session')->getFlashBag()->add('info', 'Livre bien supprimé');
+		
+				// Puis on redirige vers l'accueil
+				return $this->redirect($this->generateUrl('rx7book_index'));
+			}
+		}
+		
+		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+		return $this->render('Rx7BookBundle:Book:delete.html.twig', array(
+				'book' => $book,
+				'form'    => $form->createView()
 		));
 	}
 	
