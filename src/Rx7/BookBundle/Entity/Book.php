@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Book
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Rx7\BookBundle\Entity\Image", cascade={"persist"})
+	 * @ORM\OneToOne(targetEntity="Rx7\BookBundle\Entity\Image", cascade={"persist", "remove"})
 	 */
 	private $cover;
 	

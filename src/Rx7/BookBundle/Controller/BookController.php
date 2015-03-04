@@ -67,17 +67,19 @@ class BookController extends Controller
     		// On vérifie que les valeurs entrées sont correctes
     		// (Nous verrons la validation des objets en détail dans le prochain chapitre)
     		if ($form->isValid()) {
-    			
+    			   			
     			$em = $this->getDoctrine()->getManager();
     			$em->persist($book);
     			$em->flush();
-    		
+    			
+    			
+    			$this->get('session')->getFlashBag()->add('info', 'Article bien ajouté');
     			// On redirige vers la page de visualisation de l'article nouvellement créé
     			return $this->redirect($this->generateUrl('rx7book_show', array('id' => $book->getId())));
     		}
     	}
     	
-		
+    	
 		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
 		return $this->render('Rx7BookBundle:Book:add.html.twig', array('form' => $form->createView()));
 	}

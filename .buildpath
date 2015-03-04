@@ -5,7 +5,6 @@
 	<buildpathentry kind="src" path="vendor/sensiolabs/security-checker"/>
 	<buildpathentry kind="src" path="vendor/doctrine/inflector/lib"/>
 	<buildpathentry kind="src" path="src"/>
-	<buildpathentry excluding="composer/|symfony/assetic-bundle/|sensiolabs/security-checker/|doctrine/inflector/lib/|doctrine/orm/lib/|sensio/generator-bundle/|symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs/|symfony/symfony/src/|sensio/framework-extra-bundle/|doctrine/cache/lib/|monolog/monolog/src/Monolog/|psr/log/|twig/extensions/lib/|sensio/distribution-bundle/|swiftmailer/swiftmailer/lib/|doctrine/doctrine-bundle/|doctrine/data-fixtures/lib/|doctrine/common/lib/|symfony/monolog-bundle/|jdorn/sql-formatter/lib/|doctrine/doctrine-fixtures-bundle/|kriswallsmith/assetic/src/|doctrine/lexer/lib/|doctrine/annotations/lib/|doctrine/doctrine-cache-bundle/|doctrine/dbal/lib/|incenteev/composer-parameter-handler/|symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/|doctrine/collections/lib/|twig/twig/lib/|symfony/swiftmailer-bundle/" kind="src" path="vendor"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
 	<buildpathentry kind="src" path="vendor/sensio/generator-bundle"/>

@@ -10,7 +10,7 @@
 		{# On vérifie qu'une image soit bien associée à l'article #}
 		  {% if book.cover is not null %}
 		  <div class="col-sm-6 col-md-4 col-lg-2">
-		    <img src="{{ book.cover.url }}" alt="{{ book.cover.alt }}" class="thumbnail img-responsive" />
+		    <img src="{{ asset(book.cover.webPath) }}" alt="{{ book.cover.alt }}" class="thumbnail img-responsive" />
 		  </div>
 
 		  {% endif %}  
