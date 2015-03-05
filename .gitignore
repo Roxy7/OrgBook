@@ -11,3 +11,5 @@
 /.settings/
 /composer.lock
 /app/config/parameters.yml
+/.buildpath
+/._composer.json6798369160185968413.tmp
