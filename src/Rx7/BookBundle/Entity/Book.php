@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Book
  *
- * @ORM\Table()
+ * @ORM\Table(name="book")
  * @ORM\Entity(repositoryClass="Rx7\BookBundle\Entity\BookRepository")
  * @UniqueEntity(fields="title", message="Un livre existe déjà avec ce titre.")
  */
