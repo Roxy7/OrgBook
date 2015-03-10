@@ -33,9 +33,8 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#contact">Contact</a></li>
             
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    			<li><a href="{{ path('fos_user_security_logout') }}">{{ app.user.username }} - Déconnexion</a></li>
-			{% else %}
+            {% if app.user %}
+            {% else %}
 			  <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
 			{% endif %}
     			
@@ -69,6 +68,10 @@
 	          </ul>
       	
       			{{ render(controller("Rx7BookBundle:Book:nav", {'number': 5})) }}
+      			
+      			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+      				{{ render(controller("Rx7UserBundle:User:navLink")) }}
+      			{% endif %}
 			</div>
 			              
 		
