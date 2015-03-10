@@ -40,7 +40,6 @@ class Author
      */
     private $lastName;
 
-
     /**
      * Get id
      *
@@ -136,4 +135,9 @@ class Author
     {
         return $this->books;
     }
+    
+    public function  getFullName(){
+    	return $this->firstName .' '.$this->lastName;
+    }
+    
 }

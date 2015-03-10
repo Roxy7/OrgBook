@@ -23,3 +23,7 @@ rx7book_delete:
     defaults:  { _controller: "Rx7BookBundle:Book:delete" }
     requirements:
         page: \d*
+
+rx7author_add:
+    path:    /author/add
+    defaults:    { _controller: "Rx7BookBundle:Author:add" }

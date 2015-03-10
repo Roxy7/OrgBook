@@ -1,0 +1,15 @@
+{% extends "Rx7BookBundle::layout.html.twig" %}
+
+{% block title %}
+  Ajoutter un autheur - {{ parent() }}
+{% endblock %}
+
+{% block book_body %}
+
+  <h2>Ajouter un autheur</h2>
+
+  {% include "Rx7BookBundle:Author:form.html.twig" %}
+
+
+
+{% endblock %}

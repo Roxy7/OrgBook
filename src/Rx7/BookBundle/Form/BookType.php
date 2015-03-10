@@ -26,7 +26,7 @@ class BookType extends AbstractType
             ->add('cover',		new ImageType(), array('required' => false))
             ->add('author',		'entity', array(
             		'class' => 'Rx7BookBundle:Author',
-            		'property' => 'lastName',
+            		'property' => 'fullName',
             		'multiple' => false)
             		)
             ->add('categories',		'entity', array(
