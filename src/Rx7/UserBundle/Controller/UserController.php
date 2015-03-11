@@ -16,7 +16,8 @@ class UserController extends Controller
 	public function navLinkAction ()
 	{
 		$links = array( array('route' => 'fos_user_profile_edit', 'display' => 'Editer le profil'),
-						array('route' => 'fos_user_change_password', 'display' => 'Changer de mdp')
+						array('route' => 'fos_user_change_password', 'display' => 'Changer de mdp'),
+						array('route' => 'fos_user_security_logout', 'display' => 'Se deconecter')
 		);
 		
 		return $this->render('Rx7UserBundle::navLink.html.twig', array(
