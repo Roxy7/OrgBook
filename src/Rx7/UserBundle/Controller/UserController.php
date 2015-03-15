@@ -15,11 +15,18 @@ class UserController extends Controller
 	
 	public function navLinkAction ()
 	{
-		$links = array( array('route' => 'fos_user_profile_edit', 'display' => 'Editer le profil'),
-						array('route' => 'fos_user_change_password', 'display' => 'Changer de mdp'),
-						array('route' => 'fos_user_security_logout', 'display' => 'Se deconecter')
-		);
 		
+		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+			$links = array( array('route' => 'fos_user_profile_edit', 'display' => 'Editer le profil'),
+							array('route' => 'fos_user_change_password', 'display' => 'Changer de mdp'),
+							array('route' => 'fos_user_security_logout', 'display' => 'Se deconecter')
+			);
+			
+
+		} else {
+				$links = array( array('route' => 'fos_user_security_login', 'display' => 'Se connecter')
+				);
+		}
 		return $this->render('Rx7UserBundle::navLink.html.twig', array(
 				'link_list' => $links
 		));

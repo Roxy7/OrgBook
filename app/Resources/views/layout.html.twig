@@ -33,13 +33,6 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#contact">Contact</a></li>
             
-            {% if app.user %}
-            {% else %}
-			  <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-			{% endif %}
-    			
-            
-
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -69,9 +62,9 @@
       	
       			{{ render(controller("Rx7BookBundle:Book:nav", {'number': 5})) }}
       			
-      			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
       				{{ render(controller("Rx7UserBundle:User:navLink")) }}
-      			{% endif %}
+
 			</div>
 			              
 		

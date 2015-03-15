@@ -1,3 +1,5 @@
+{% if app.user.username is defined %}
+
 <h3><a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a></h3>
 
 <ul class="nav nav-pills nav-stacked">
@@ -6,3 +8,9 @@
   {% endfor %}
  
 </ul>
+
+{% else %}
+	{% for link in link_list %}
+  		<h3><a href="{{ path(link.route) }}">{{ link.display }}</a></h3>
+ 	{% endfor %}
+{% endif %}
