@@ -28,6 +28,12 @@ class Book
 	private $author;
 	
 	/**
+	 * @ORM\ManyToOne(targetEntity="Rx7\BookshelfBundle\Entity\Shelf")
+	 * @ORM\JoinColumn(nullable=true)
+	 */
+	private $shelf;
+	
+	/**
 	 * @ORM\ManyToMany(targetEntity="Rx7\BookBundle\Entity\Category", cascade={"persist"})
 	 */
 	private $categories;
@@ -262,5 +268,28 @@ class Book
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set shelf
+     *
+     * @param \Rx7\BookshelfBundle\Entity\Shelf $shelf
+     * @return Book
+     */
+    public function setShelf(\Rx7\BookshelfBundle\Entity\Shelf $shelf)
+    {
+        $this->shelf = $shelf;
+
+        return $this;
+    }
+
+    /**
+     * Get shelf
+     *
+     * @return \Rx7\BookshelfBundle\Entity\Shelf 
+     */
+    public function getShelf()
+    {
+        return $this->shelf;
     }
 }
