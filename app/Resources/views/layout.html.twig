@@ -57,6 +57,7 @@
 	            <li role="presentation"><a href="{{ path('rx7book_index') }}">Accueil</a></li>
 	            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 	            	<li role="presentation"><a href="{{ path('rx7book_add') }}">Ajouter un livre</a></li>
+	            	<li role="presentation"><a href="{{ path('rx7author_add') }}">Ajouter un auteur</a></li>
 	            {% endif %}
 	          </ul>
       	
