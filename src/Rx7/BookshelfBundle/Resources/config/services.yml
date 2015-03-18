@@ -1,0 +1,4 @@
+services:
+#    rx7_bookshelf.example:
+#        class: Rx7\BookshelfBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

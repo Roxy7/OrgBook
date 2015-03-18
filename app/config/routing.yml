@@ -1,3 +1,7 @@
+rx7_bookshelf:
+    resource: "@Rx7BookshelfBundle/Resources/config/routing.yml"
+    prefix:   /
+
 index:
     path:      /
     defaults:  { _controller: "Rx7BookBundle:Book:index", page: 1 }

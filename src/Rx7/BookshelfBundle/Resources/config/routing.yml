@@ -1,0 +1,3 @@
+rx7_bookshelf_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: Rx7BookshelfBundle:Default:index }

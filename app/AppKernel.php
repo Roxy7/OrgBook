@@ -22,6 +22,7 @@ class AppKernel extends Kernel
         	new FOS\UserBundle\FOSUserBundle(),
             new Rx7\BookBundle\Rx7BookBundle(),
             new Rx7\UserBundle\Rx7UserBundle(),
+            new Rx7\BookshelfBundle\Rx7BookshelfBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
