@@ -10,6 +10,19 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class BookshelfController extends Controller
 {
 	
+	public function indexAction()
+	{
+	
+		$em = $this->getDoctrine()
+		->getManager();
+		$bookshelf = $em->getRepository('Rx7BookshelfBundle:Bookshelf')
+		->findAll();
+	
+		return $this->render('Rx7BookshelfBundle:Bookshelf:index.html.twig', array(
+				'bookshelf_list' => $bookshelf // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
+		));
+	}
+	
 	/**
 	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
 	 */

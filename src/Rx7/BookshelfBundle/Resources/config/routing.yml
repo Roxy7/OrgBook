@@ -1,3 +1,7 @@
+rx7bookshelf_index:
+    path:    /
+    defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:index" }
+    
 rx7_bookshelf_add:
     path:     /add
     defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:add" }
