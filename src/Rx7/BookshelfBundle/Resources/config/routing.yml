@@ -3,5 +3,14 @@ rx7_bookshelf_add:
     defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:add" }
 
 rx7bookshelf_show:
-    path:     /add
-    defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:add" }
+    path:     /show/{id}
+    defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:show" }
+    requirements:
+        id: \d*
+    
+rx7bookshelf_update:
+    path:     /update/{id}
+    defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:update" }
+    requirements:
+        id: \d*
+        

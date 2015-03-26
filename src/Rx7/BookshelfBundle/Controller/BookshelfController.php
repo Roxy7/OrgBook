@@ -5,9 +5,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Rx7\BookshelfBundle\Entity\Bookshelf;
 use Rx7\BookshelfBundle\Form\BookshelfType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class BookshelfController extends Controller
 {
+	
+	/**
+	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
+	 */
 	public function addAction()
 	{
 		$bookshelf = new Bookshelf();
@@ -40,6 +45,44 @@ class BookshelfController extends Controller
 		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
 		return $this->render('Rx7BookshelfBundle:Bookshelf:add.html.twig', array('form' => $form->createView()));
 		
+	}
+	
+	/**
+	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
+	 */
+	public function updateAction()
+	{
+		
+	}
+	
+	public function showAction($id)
+	{
+			$repository = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('Rx7BookshelfBundle:Bookshelf');
+		$bookshelf = $repository->find($id);
+		
+		if($bookshelf === null)
+		{
+			throw $this->createNotFoundException('Bookshelf [id='.$id.'] inexistant.');
+		}
+		
+		return $this->render('Rx7BookshelfBundle:Bookshelf:show.html.twig', array(
+				'bookshelf' => $bookshelf
+		));
+	}
+	
+	public function navAction()
+	{
+	
+		$em = $this->getDoctrine()
+		->getManager();
+		$bookshelf = $em->getRepository('Rx7BookshelfBundle:Bookshelf')
+		->findAll();
+	
+		return $this->render('Rx7BookshelfBundle:Bookshelf:nav.html.twig', array(
+				'bookshelf_list' => $bookshelf // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
+		));
 	}
 	
 }

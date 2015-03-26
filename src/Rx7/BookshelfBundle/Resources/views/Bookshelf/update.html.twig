@@ -1,0 +1,15 @@
+{% extends "Rx7BookshelfBundle::layout.html.twig" %}
+
+{% block title %}
+  Ajoutter une bibliotheque - {{ parent() }}
+{% endblock %}
+
+{% block bookshelf_body %}
+
+  <h2>Ajouter une bibliotheque</h2>
+
+  {% include "Rx7BookshelfBundle:Bookshelf:form.html.twig" %}
+
+
+
+{% endblock %}

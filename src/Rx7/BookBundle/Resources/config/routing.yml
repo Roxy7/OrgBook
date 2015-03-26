@@ -16,13 +16,13 @@ rx7book_update:
     path:      /update/{id}
     defaults:  { _controller: "Rx7BookBundle:Book:update" }
     requirements:
-        page: \d*
+        id: \d*
     
 rx7book_delete:
     path:      /delete/{id}
     defaults:  { _controller: "Rx7BookBundle:Book:delete" }
     requirements:
-        page: \d*
+        id: \d*
 
 rx7author_add:
     path:    /author/add

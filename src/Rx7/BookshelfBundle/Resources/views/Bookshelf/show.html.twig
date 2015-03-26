@@ -1,0 +1,17 @@
+{% extends "Rx7BookshelfBundle::layout.html.twig" %}
+
+{% block title %}
+  Bibliotheque - {{ parent() }}
+{% endblock %}
+
+{% block bookshelf_body %}
+
+	<h2>{{ bookshelf.name }}</h2>
+  
+	<ul>
+		<li>Localisation : {{ bookshelf.localisation }}</li>
+		<li>Position : {{ bookshelf.position }}</li>
+	</ul>
+
+
+{% endblock %}

@@ -1,0 +1,7 @@
+<h3>Mes bibliothèques</h3>
+
+<ul class="nav nav-pills nav-stacked">
+  {% for bookshelf in bookshelf_list %}
+    <li role="presentation""><a href="{{ path('rx7bookshelf_show', {'id': bookshelf.id}) }}">{{ bookshelf.name }}</a></li>
+  {% endfor %}
+</ul>
