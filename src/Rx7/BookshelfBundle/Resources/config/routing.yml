@@ -17,4 +17,9 @@ rx7bookshelf_update:
     defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:update" }
     requirements:
         id: \d*
-        
+
+rx7bookshelf_addShelf:
+    path:     /addShelf/{id}
+    defaults: { _controller: "Rx7BookshelfBundle:Bookshelf:addShelf" }
+    requirements:
+        id: \d*

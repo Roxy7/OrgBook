@@ -7,6 +7,7 @@ use Rx7\BookshelfBundle\Entity\Bookshelf;
 use Rx7\BookshelfBundle\Form\BookshelfType;
 use Rx7\BookshelfBundle\Form\BookshelfEditType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Rx7\BookshelfBundle\Entity\Shelf;
 
 class BookshelfController extends Controller
 {
@@ -92,7 +93,7 @@ class BookshelfController extends Controller
 		
 				$this->get('session')->getFlashBag()->add('info', 'Bibliothèque bien modifié');
 				// On redirige vers la page de visualisation de l'article nouvellement créé
-				return $this->redirect($this->generateUrl('rx7book_show', array('id' => $bookshelf->getId())));
+				return $this->redirect($this->generateUrl('rx7bookshelf_show', array('id' => $bookshelf->getId())));
 			}
 		}
 		
@@ -130,5 +131,33 @@ class BookshelfController extends Controller
 				'bookshelf_list' => $bookshelf // C'est ici tout l'intérêt : le contrôleur passe les variables nécessaires au template !
 		));
 	}
+	
+	public function addShelfAction($id)
+	{
+		
+		$repository = $this->getDoctrine()
+		->getManager()
+		->getRepository('Rx7BookshelfBundle:Bookshelf');
+		$bookshelf = $repository->find($id);
+		
+		if($bookshelf === null)
+		{
+			throw $this->createNotFoundException('Bookshelf [id='.$id.'] inexistant.');
+		}
+		
+		$shelf = new Shelf();
+		$shelf->setPosition('1');
+		$shelf->setBookshelf($bookshelf);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($shelf);
+		$em->flush();
+		
+		return $this->render('Rx7BookshelfBundle:Bookshelf:show.html.twig', array(
+				'bookshelf' => $bookshelf
+		));
+		
+	}
+	
+	
 	
 }
