@@ -98,27 +98,4 @@ class Bookshelf
     {
         return $this->position;
     }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Bookshelf
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 }

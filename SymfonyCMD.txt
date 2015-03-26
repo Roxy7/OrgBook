@@ -1,0 +1,6 @@
+php app/console generate:doctrine:entity
+php app/console generate:doctrine:entities Rx7BookshelfBundle:Bookshelf
+
+
+php app/console doctrine:schema:update --dump-sql
+php app/console doctrine:schema:update --force

@@ -1,6 +1,6 @@
 rx7_bookshelf:
     resource: "@Rx7BookshelfBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /bookshelf
 
 index:
     path:      /
