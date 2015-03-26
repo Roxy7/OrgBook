@@ -1,0 +1,14 @@
+<div class="well">
+	<form action="{{ path('rx7bookshelf_update', {'id': bookshelf.id}) }}" method="post" {{ form_enctype(form) }}>
+	{# Les erreurs générales du formulaire. #}
+	{{ form_errors(form) }}
+  
+	
+	
+	{{ form_rest(form) }}
+	
+    <input type="submit" class="btn btn-primary" />
+    
+    
+  </form>
+</div>

@@ -18,7 +18,10 @@
       <i class="icon-chevron-left"></i>
       Retour à la liste
     </a>
-
+    <a href="{{ path('rx7bookshelf_update', {'id': bookshelf.id}) }}" class="btn">
+      <i class="icon-edit"></i>
+      Modifier la bibliothèque
+    </a>
   </p>
 
 {% endblock %}

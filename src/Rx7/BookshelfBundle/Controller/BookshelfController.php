@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Rx7\BookshelfBundle\Entity\Bookshelf;
 use Rx7\BookshelfBundle\Form\BookshelfType;
+use Rx7\BookshelfBundle\Form\BookshelfEditType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class BookshelfController extends Controller
@@ -63,9 +64,41 @@ class BookshelfController extends Controller
 	/**
 	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
 	 */
-	public function updateAction()
+	public function updateAction($id)
 	{
+		// On récupère l'EntityManager
+		$em = $this->getDoctrine()
+		->getManager();
 		
+		// On récupère l'entité correspondant à l'id $id
+		$bookshelf = $em->getRepository('Rx7BookshelfBundle:Bookshelf')
+		->find($id);
+		
+		if ($bookshelf === null) {
+			throw $this->createNotFoundException('Bookshelf [id='.$id.'] inexistant.');
+		}
+		
+		$form = $this->createForm(new BookshelfEditType, $bookshelf);
+		$request = $this->get('request');
+		
+		
+		if($request->getMethod() == 'POST')
+		{
+			$form->bind($request);
+		
+			if ($form->isValid()) {
+				 
+				$em->flush();
+		
+				$this->get('session')->getFlashBag()->add('info', 'Bibliothèque bien modifié');
+				// On redirige vers la page de visualisation de l'article nouvellement créé
+				return $this->redirect($this->generateUrl('rx7book_show', array('id' => $bookshelf->getId())));
+			}
+		}
+		
+		
+		return $this->render('Rx7BookshelfBundle:Bookshelf:update.html.twig', array('form' => $form->createView(),
+				'bookshelf' => $bookshelf));
 	}
 	
 	public function showAction($id)
