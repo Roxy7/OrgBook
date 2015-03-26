@@ -22,7 +22,7 @@ class Shelf
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Rx7\BookshelfBundle\Entity\Bookshelf")
+     * @ORM\ManyToOne(targetEntity="Rx7\BookshelfBundle\Entity\Bookshelf", inversedBy="shelfs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $bookshelf;
@@ -66,5 +66,28 @@ class Shelf
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set bookshelf
+     *
+     * @param \Rx7\BookshelfBundle\Entity\Bookshelf $bookshelf
+     * @return Shelf
+     */
+    public function setBookshelf(\Rx7\BookshelfBundle\Entity\Bookshelf $bookshelf)
+    {
+        $this->bookshelf = $bookshelf;
+
+        return $this;
+    }
+
+    /**
+     * Get bookshelf
+     *
+     * @return \Rx7\BookshelfBundle\Entity\Bookshelf 
+     */
+    public function getBookshelf()
+    {
+        return $this->bookshelf;
     }
 }

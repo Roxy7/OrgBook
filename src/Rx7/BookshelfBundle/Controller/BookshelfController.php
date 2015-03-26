@@ -132,6 +132,9 @@ class BookshelfController extends Controller
 		));
 	}
 	
+	/**
+	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
+	 */
 	public function addShelfAction($id)
 	{
 		
@@ -152,10 +155,8 @@ class BookshelfController extends Controller
 		$em->persist($shelf);
 		$em->flush();
 		
-		return $this->render('Rx7BookshelfBundle:Bookshelf:show.html.twig', array(
-				'bookshelf' => $bookshelf
-		));
-		
+		return $this->redirect($this->generateUrl('rx7bookshelf_show', array('id' => $id)));
+
 	}
 	
 	

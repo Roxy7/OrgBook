@@ -42,6 +42,10 @@ class Bookshelf
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rx7\BookshelfBundle\Entity\Shelf", mappedBy="bookshelf")
+     */
+    private $shelfs;
 
     /**
      * Get id
@@ -97,5 +101,28 @@ class Bookshelf
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Bookshelf
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

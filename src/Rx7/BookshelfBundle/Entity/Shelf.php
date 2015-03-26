@@ -22,7 +22,7 @@ class Shelf
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Rx7\BookshelfBundle\Entity\Bookshelf")
+     * @ORM\ManyToOne(targetEntity="Rx7\BookshelfBundle\Entity\Bookshelf", inversedBy="shelfs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $bookshelf;

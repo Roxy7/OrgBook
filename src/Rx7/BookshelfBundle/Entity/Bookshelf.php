@@ -42,6 +42,10 @@ class Bookshelf
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Rx7\BookshelfBundle\Entity\Shelf", mappedBy="bookshelf")
+     */
+    private $shelfs;
 
     /**
      * Get id
@@ -120,5 +124,50 @@ class Bookshelf
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->shelfs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add shelfs
+     *
+     * @param \Rx7\BookshelfBundle\Entity\Shelf $shelfs
+     * @return Bookshelf
+     */
+    public function addShelf(\Rx7\BookshelfBundle\Entity\Shelf $shelfs)
+    {
+        $this->shelfs[] = $shelfs;
+
+        return $this;
+    }
+
+    /**
+     * Remove shelfs
+     *
+     * @param \Rx7\BookshelfBundle\Entity\Shelf $shelfs
+     */
+    public function removeShelf(\Rx7\BookshelfBundle\Entity\Shelf $shelfs)
+    {
+        $this->shelfs->removeElement($shelfs);
+    }
+
+    /**
+     * Get shelfs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getShelfs()
+    {
+        return $this->shelfs;
+    }
+    
+    public function getNumberOfShelf()
+    {
+    	return count($this->shelfs);
     }
 }
