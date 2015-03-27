@@ -88,7 +88,10 @@ class BookController extends Controller
 		// Puis modifiez la ligne du render comme ceci, pour prendre en compte l'article :
 		return $this->render('Rx7BookBundle:Book:add.html.twig', array('form' => $form->createView()));
 	}
-	
+
+	/**
+	 * @Secure(roles="IS_AUTHENTICATED_REMEMBERED")
+	 */
 	public function updateAction($id)
 	{
 		// On récupère l'EntityManager
