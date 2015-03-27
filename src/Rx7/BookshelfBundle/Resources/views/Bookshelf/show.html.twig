@@ -14,11 +14,32 @@
 		<li>Nombre d'étagère : {{ bookshelf.NumberOfShelf }}</li>
 	</ul>
 
+<div class="well">
+{% for shelf in bookshelf.shelfs %}
+<ul>
+	<li>id : {{ shelf.id }}</li>
+	<li>position : {{ shelf.position }}</li>
+	{%  if shelf.NbBooks not in [0] %}
+	<h4>Liste des livres :</h4>
+		{% for book in shelf.books %}
+		
+		<li><a href="{{ path('rx7book_show', {'id': book.id}) }}">{{ book.title }}</a></li>
+	    {% else %}    
+	        Vide
+		{% endfor %}
+{% endif %}
+</ul>
+    {% else %}
+      Pas d'étagère dans cette bibliothèque
+    {% endfor %}
+</div>
+	
 	  <p>
     <a href="{{ path('rx7bookshelf_index') }}" class="btn">
       <i class="icon-chevron-left"></i>
       Retour à la liste
     </a>
+    
     <a href="{{ path('rx7bookshelf_update', {'id': bookshelf.id}) }}" class="btn">
       <i class="icon-edit"></i>
       Modifier la bibliothèque

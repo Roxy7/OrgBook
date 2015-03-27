@@ -135,4 +135,9 @@ class Shelf
     {
         return $this->books;
     }
+    
+    public function getNbBooks()
+    {
+    	return count($this->books);
+    }
 }
