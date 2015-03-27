@@ -34,6 +34,11 @@ class BookType extends AbstractType
             		'property' => 'name',
             		'multiple' => true)
             )
+            ->add('shelf', 'entity', array(
+            		'class' => 'Rx7BookshelfBundle:Shelf',
+            		'property' => 'id',
+            		'multiple' => false
+            ))
         ;
             // On récupère la factory (usine)
             $factory = $builder->getFormFactory();

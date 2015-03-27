@@ -28,6 +28,11 @@ class Shelf
     private $bookshelf;
     
     /**
+     * @ORM\OneToMany(targetEntity="Rx7\BookBundle\Entity\Book", mappedBy="shelf")
+     */
+    private $books;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
@@ -89,5 +94,45 @@ class Shelf
     public function getBookshelf()
     {
         return $this->bookshelf;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add books
+     *
+     * @param \Rx7\BookBundle\Entity\Book $books
+     * @return Shelf
+     */
+    public function addBook(\Rx7\BookBundle\Entity\Book $books)
+    {
+        $this->books[] = $books;
+
+        return $this;
+    }
+
+    /**
+     * Remove books
+     *
+     * @param \Rx7\BookBundle\Entity\Book $books
+     */
+    public function removeBook(\Rx7\BookBundle\Entity\Book $books)
+    {
+        $this->books->removeElement($books);
+    }
+
+    /**
+     * Get books
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

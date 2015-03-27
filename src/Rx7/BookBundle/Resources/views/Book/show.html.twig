@@ -33,7 +33,10 @@
   <div class="well">
     {{ book.text }}
   </div>
-
+  <div class="well">
+    <h4>Localisation</h4>
+    Bibliothèque : {{ book.shelf.bookshelf.name }} - étagère : {{ book.shelf.id }}
+  </div>
  
   <p>
     <a href="{{ path('rx7book_index') }}" class="btn">

@@ -28,6 +28,11 @@ class Shelf
     private $bookshelf;
     
     /**
+     * @ORM\OneToMany(targetEntity="Rx7\BookBundle\Entity\Book", mappedBy="shelf")
+     */
+    private $books;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
